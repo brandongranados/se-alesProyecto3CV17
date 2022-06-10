@@ -3,7 +3,7 @@ create database actividades;
 use actividades;
 
 create table usuarios (
-idUsuario integer auto_increment primary key, email varchar(100) not null unique,
+idUsuario integer auto_increment primary key, email varchar(100) not null unique, nombreUsuario varchar(150) not null unique,
 passwordUser varchar(100) not null unique, foto longblob, index(email)  
 );
 
