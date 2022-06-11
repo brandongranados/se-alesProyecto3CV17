@@ -109,6 +109,6 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#tabla').load('./tablaServicios.php');
+		$('#tabla').load('./tablaTasks.php');
 	});
 </script>
