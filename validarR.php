@@ -7,10 +7,10 @@
 
      if($_SERVER["REQUEST_METHOD"] == "POST"){
         //Validando nombre
-    /*    if(empty(trim($_POST["nombre"]))){
+        if(empty(trim($_POST["nombre"]))){
             $username_error = "Por favor ingrese su nombre";
         }else{
-            $sql = "SELECT usuario FROM usuarios WHERE nombre = ?";
+            $sql = "SELECT nombreUsuario FROM usuarios WHERE nombreUsuario = ?";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
                 mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -24,7 +24,7 @@
                     echo "Ups! Algo Salió mal, inténtalo más tarde";
                 }
             }
-        }*/
+        }
         
         //Validando email
         if(empty(trim($_POST["email"]))){
@@ -73,10 +73,10 @@
         }
         
         if(empty($username_error) && empty($email_error) && empty($contra_error) && empty($contra1_error)){
-            $sql = "INSERT INTO usuarios ( passwordUser, email) VALUE (?,?)";
+            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email) VALUE (?,?,?)";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
-                mysqli_stmt_bind_param($stmt, "ss", $param_contra, $param_email);
+                mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_contra, $param_email);
                 $param_username = $username;
                 $param_contra = $contra;
                 $param_email = $email;
