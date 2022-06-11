@@ -1,0 +1,50 @@
+li{
+    float: left!important;
+    list-style: none!important;
+    padding: 10px!important;
+    font-size: 1.5rem!important;
+    text-decoration: none!important;
+    font-family: Arial!important;
+    color: rgb(255, 255, 255)!important;
+}
+nav{
+    float: right!important;
+    margin-top: 22px!important;
+    margin-right: 10px!important;
+    font-size: 1.5rem!important;
+    text-decoration: none!important;
+    font-family: Arial!important;
+    color: rgb(255, 255, 255)!important;
+}
+
+li:hover a{
+    color: black!important;
+
+}
+.navText{
+    font-size: 1.5rem!important;
+    text-decoration: none!important;
+    font-family: Arial!important;
+    color: rgb(255, 255, 255)!important;
+}
+
+.encabe{
+    
+    background-color: #0d6efd !important;
+    position: fixed !important;
+    z-index: 1000!important;
+    top: 0!important;
+    left: 0!important;
+    right: 0!important;
+    
+}
+.Logo{
+    width: 9.0625rem!important;
+    height: 100%!important;
+    float: left!important;
+    position: absolute!important;
+}
+.logito{
+    max-width: 90%!important;
+    height: auto!important;
+}

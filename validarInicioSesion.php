@@ -9,7 +9,7 @@ $consulta = "SELECT *FROM usuarios where email = '$usuario' and passwordUser = '
 $resultado = mysqli_query($conexion, $consulta);
 $filas = mysqli_num_rows($resultado);
 if($filas){
-        header("location:hola.php");  
+        header("location:home.php");  
 }else{
     //Si no esta regisrado mandamos mensaje diciendo que las credenciales son incorrectas
     ?>
