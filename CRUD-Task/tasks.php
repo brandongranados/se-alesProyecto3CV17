@@ -1,5 +1,5 @@
 <?php
-    require_once "conexion.php";
+    require_once "../conexion.php";
     session_start();
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once "conexion.php";
+	require_once "../conexion.php";
 	
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
@@ -12,19 +12,19 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Rewards</title>
-	<link rel="stylesheet" type="text/css" href="./static/librerias/bootstrap/css/bootstraps.css">
-	<link rel="stylesheet" type="text/css" href="./static/librerias/alertifyjs/css/alertify.css">
-	<script src="./static/js/funciones.js"></script>
-	<link rel="stylesheet" type="text/css" href="./static/librerias/alertifyjs/css/themes/default.css">
-  <link rel="stylesheet" type="text/css" href="./static/librerias/select2/css/select2.css">
+	<link rel="stylesheet" type="text/css" href="../static/librerias/bootstrap/css/bootstraps.css">
+	<link rel="stylesheet" type="text/css" href="../static/librerias/alertifyjs/css/alertify.css">
+	<script src="../static/js/funciones.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/librerias/alertifyjs/css/themes/default.css">
+  <link rel="stylesheet" type="text/css" href="../static/librerias/select2/css/select2.css">
   <link href="./static/css/agregar.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" type="image/ico" href="./static/images/icono.ico">
-	<link href="./static/css/navegacion.css" rel="stylesheet" type="text/css">
-	<script src="./static/librerias/jquery-3.2.1.min.js"></script>
-	<script src="./static/librerias/bootstrap/js/bootstrap.js"></script>
-	<script src="./static/librerias/alertifyjs/alertify.js"></script>
-  	<script src="./static/librerias/select2/js/select2.js"></script>
-	<script src="./static/alert/package/dist/sweetalert2.all.min.js"></script>
+  <link rel="shortcut icon" type="image/ico" href="../static/images/icono.ico">
+	<link href="../static/css/navegacion.css" rel="stylesheet" type="text/css">
+	<script src="../static/librerias/jquery-3.2.1.min.js"></script>
+	<script src="../static/librerias/bootstrap/js/bootstrap.js"></script>
+	<script src="../static/librerias/alertifyjs/alertify.js"></script>
+  	<script src="../static/librerias/select2/js/select2.js"></script>
+	<script src="../static/alert/package/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 <header class="encabe">
@@ -48,6 +48,7 @@
               <input type="text" name="nombre" id="nombre"  maxlength="100" required>
               <label>Puntos por hacer la tarea</label>
               <input type="number" name="valor" id="valor"  required> 
+              <br>
               <label>Imagen</label>
               <input type="file" name="imagen" id="imagen" class="form-control input-sm"> 
         </div>

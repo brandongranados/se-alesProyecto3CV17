@@ -1,5 +1,5 @@
 <?php 
-	require_once "conexion.php";
+	require_once "../conexion.php";
 	$id = $_POST['idTasks'];
 	$sql="DELETE from tarea where idTarea = $id";
 	$result=mysqli_query($conexion,$sql);

@@ -1,5 +1,5 @@
 <?php
-    require_once "conexion.php";
+    require_once "../conexion.php";
     $nombre =$_POST['nombre'];
     $valor =$_POST['valor'];   
     $Object = new DateTime();

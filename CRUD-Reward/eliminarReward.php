@@ -1,5 +1,5 @@
 <?php 
-	require_once "conexion.php";
+	require_once "../conexion.php";
 	$id = $_POST['idRewards'];
 	$sql="DELETE from recompensa where idRecompensa = $id";
 	$result=mysqli_query($conexion,$sql);

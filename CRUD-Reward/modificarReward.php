@@ -1,5 +1,5 @@
 <?php
-    require_once "conexion.php";
+    require_once "../conexion.php";
     $nombre =$_POST['nombre'];
     $valor =$_POST['valor'];   
     $Object = new DateTime();
@@ -10,7 +10,7 @@
     $archivo = $_FILES['imagen']['tmp_name'];
     $tipoImagen = $_FILES['imagen']['type'];
     $tamImagen= $_FILES['imagen']['size'];
-    $ruta = "./static/images/rewards";
+    $ruta = "../static/images/rewards";
     $usuario = $_SESSION['correo'];
     $ruta = $ruta."/".$nombreimagen;
     if($tamImagen<=1000000){

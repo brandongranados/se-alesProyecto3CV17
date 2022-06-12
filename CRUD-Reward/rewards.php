@@ -1,5 +1,5 @@
 <?php
-    require_once "conexion.php";
+    require_once "../conexion.php";
     session_start();
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
@@ -57,7 +57,7 @@
          $archivo = $_FILES['imagen']['tmp_name'];
          $tipoImagen = $_FILES['imagen']['type'];
          $tamImagen= $_FILES['imagen']['size'];
-         $ruta = "./static/images/rewards";
+         $ruta = "../static/images/rewards";
          $ruta = $ruta."/".$nombreimagen;
          if($tamImagen<=1000000){
              if($tamImagen != 0){
@@ -110,7 +110,7 @@
                         mysqli_stmt_bind_param($stmt, "siss", $param_nombre, $param_valor, $fechayHora,$param_ruta);
                         $param_nombre = $nombre;
                         $param_valor = $valor;
-                        $param_ruta = "./static/images/rewards/premio.png";
+                        $param_ruta = "../static/images/rewards/premio.png";
                         if(mysqli_stmt_execute($stmt)){
                             header("location:gestionRewards.php");
                         }else{

@@ -1,6 +1,6 @@
 <?php
     session_start();
-     include "conexion.php";
+     include "../conexion.php";
     $usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
     $consulta ="SELECT *FROM Recompensa";
