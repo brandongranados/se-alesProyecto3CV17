@@ -6,13 +6,21 @@
     $Object->setTimezone(new DateTimeZone('America/Mexico_City'));
     $fechayHora = $Object->format("Y-m-d h:i:s a"); 
     $id = $_POST['idRewards'];
+    $usuarios =$_POST['usuarios'];
     $nombreimagen = $_FILES['imagen']['name'];
     $archivo = $_FILES['imagen']['tmp_name'];
     $tipoImagen = $_FILES['imagen']['type'];
     $tamImagen= $_FILES['imagen']['size'];
     $ruta = "../static/images/rewards";
-    $usuario = $_SESSION['correo'];
     $ruta = $ruta."/".$nombreimagen;
+    foreach($usuarios as $usuarioslist){        
+        $comprobar = mysqli_query($conexion, "SELECT *FROM recompensausuario WHERE idRecompensa = '$id'  and idUsuario = '$usuarioslist'");
+        $row = mysqli_fetch_array($comprobar);
+        if(empty($row)){
+            $query = "INSERT INTO recompensausuario VALUES ('$id','$usuarioslist')";
+            $query_run = mysqli_query($conexion, $query);
+        }
+    }
     if($tamImagen<=1000000){
         if($tamImagen != 0){
             if($tipoImagen == "image/jpeg" || $tipoImagen == "image/jpg" || $tipoImagen == "image/png" || $tipoImagen == "image/gif"){
@@ -77,9 +85,4 @@
 <?php       
         
     }  
-    if($result){
-        header("location:gestionRewards.php");
-    }else{
-        echo "No se pudo modificar la recompensa!";
-    }
 ?>

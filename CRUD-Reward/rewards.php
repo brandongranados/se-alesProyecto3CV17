@@ -10,6 +10,8 @@
     $fechayHora = $Object->format("Y-m-d h:i:s a"); 
     $nombre = $valor = null;
     $nombre_error = $valor_error = "";
+    
+
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         

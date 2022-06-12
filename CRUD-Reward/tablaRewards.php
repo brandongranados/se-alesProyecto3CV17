@@ -30,10 +30,10 @@
                       ?>
 
                       <tr>
-                        <td style="width:30%; vertical-align: middle;" ><?php echo $row['nombreRecompensa']; ?></td>
+                        <td style="width:20%; vertical-align: middle;" ><?php echo $row['nombreRecompensa']; ?></td>
                         <td style="width:14%; vertical-align: middle;"><?php echo $row['puntosCuesta']; ?></td>
                         <td style="width:20%; vertical-align: middle;"><?php echo $row['fechaHora']; ?></td>
-                        <td style="width:30%; vertical-align: middle;"><img style="width:50%; height:60%;" src="<?php echo $row['foto']; ?>">
+                        <td style="width:20%; vertical-align: middle;"><img style="width:50%; height:60%;" src="<?php echo $row['foto']; ?>">
                         <td style="width:10%; vertical-align: middle;">
                             <button class="btn-warning btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="agregaform('<?php echo $datas ?>')">
                             </button>

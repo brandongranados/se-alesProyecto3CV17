@@ -84,22 +84,22 @@
   <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">¿Quieres eliminar esta tarea?</h4>
-      </div>
-      <div class="modal-body">
-      <form  action="eliminarTask.php"  method="post">
-          <input type="text" hidden=""  id="ids1" name="idTasks">
-      </div>
-      <div class="modal-footer">
-      <input type="submit" class="btn btn-success" value="Si quiero eliminarlo">
-      </form> 
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">¿Quieres eliminar esta tarea?</h4>
+        </div>
+        <div class="modal-body">
+        <form  action="eliminarTask.php"  method="post">
+            <input type="text" hidden=""  id="ids1" name="idTasks">
+        </div>
+        <div class="modal-footer">
+        <input type="submit" class="btn btn-success" value="Si quiero eliminarlo">
+        </form> 
+        </div>
       </div>
     </div>
   </div>
-</div>
-<br>
+  <br>
   <footer>
         <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
         <span class="w-100 text-center">Nombre del proyecto &copy; 2022</span>
