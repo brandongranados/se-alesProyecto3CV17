@@ -64,8 +64,8 @@ insert into usuarioDependiente values (1, 2), (1, 5), (3, 4);
 commit;
 
 start transaction;
-insert into tarea (nombreTarea, valorPuntos, fechaHora) values("tarea1", 525689, '2011-12-18 13:17:17'), 
-("tarea2", 1000, '2021-05-01 08:55:29'), ("tarea3", 385, '1998-10-12 17:01:37'), ("tarea4", 97, '2015-09-30 21:17:17'), ("tarea5", 12, '2001-03-03 11:11:11');
+insert into tarea (nombreTarea, valorPuntos, fechaHora, idUsuario) values("tarea1", 525689, '2011-12-18 13:17:17', 1), 
+("tarea2", 1000, '2021-05-01 08:55:29', 1), ("tarea3", 385, '1998-10-12 17:01:37', 1), ("tarea4", 97, '2015-09-30 21:17:17', 2), ("tarea5", 12, '2001-03-03 11:11:11', 3);
 commit;
 
 start transaction;
@@ -73,8 +73,8 @@ insert into tareaRealizada values (1, 1, 1), (2, 3, 2), (4, 5, 3);
 commit;
 
 start transaction;
-insert into recompensa (nombreRecompensa, puntosCuesta, fechaHora, foto) values ("exito", 1000, "2022-05-03 22:17:05", null), ("exito2", 2000, "2022-07-23 23:23:23", null), 
-("exito3", 3000, "2022-12-12 22:22:22", null), ("exito4", 4000, "2012-12-12 10:10:10", null), ("exito5", 5000, "2010-10-10 07:07:07", null);
+insert into recompensa (nombreRecompensa, puntosCuesta, fechaHora, foto) values ("exito", 1000, "2022-05-03 22:17:05", "../static/images/rewards/premio.png"), ("exito2", 2000, "2022-07-23 23:23:23", "../static/images/rewards/premio.png"), 
+("exito3", 3000, "2022-12-12 22:22:22", "../static/images/rewards/premio.png"), ("exito4", 4000, "2012-12-12 10:10:10", "../static/images/rewards/premio.png"), ("exito5", 5000, "2010-10-10 07:07:07", "../static/images/rewards/premio.png");
 commit;
 
 start transaction;

@@ -1,8 +1,14 @@
 <?php
     require_once "../conexion.php";
     session_start();
-	$usuario = $_SESSION['correo'];
-	$contraseña = $_SESSION['pass'];
+    $user = $_SESSION['correo'];
+    $consultauser = mysqli_query($conexion, "SELECT * FROM usuarios WHERE email = '$user'");
+    $row = mysqli_num_rows($consultauser);
+    if($row > 0){ 
+        while($fila3 = mysqli_fetch_array($consultauser)) {
+            $idUsuario= $fila3['idUsuario'];
+        }
+    }
     $nombre =$_POST['nombre'];
     $valor =$_POST['valor'];
     $Object = new DateTime();
@@ -55,10 +61,10 @@
       
                
         if(empty($nombre_error) && empty($valor_error) ){
-            $sql = "INSERT INTO tarea (nombreTarea,valorPuntos,fechaHora) VALUE (?,?,?)";
+            $sql = "INSERT INTO tarea (nombreTarea,valorPuntos,fechaHora,idUsuario) VALUE (?,?,?,?)";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
-                mysqli_stmt_bind_param($stmt, "sis", $param_nombre, $param_valor, $fechayHora);
+                mysqli_stmt_bind_param($stmt, "sisi", $param_nombre, $param_valor, $fechayHora, $idUsuario);
                 $param_nombre = $nombre;
                 $param_valor = $valor;
                 if(mysqli_stmt_execute($stmt)){

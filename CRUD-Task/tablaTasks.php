@@ -3,7 +3,14 @@
      include "../conexion.php";
     $usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
-    $consulta ="SELECT *FROM tarea";
+    $consultauser = mysqli_query($conexion, "SELECT * FROM usuarios WHERE email = '$usuario'");
+    $row = mysqli_num_rows($consultauser);
+    if($row > 0){ 
+        while($fila3 = mysqli_fetch_array($consultauser)) {
+            $idUsuario= $fila3['idUsuario'];
+        }
+    }
+    $consulta ="SELECT *FROM tarea WHERE idUsuario = '$idUsuario'";
     $resultado = mysqli_query($conexion, $consulta);
 ?>
   
