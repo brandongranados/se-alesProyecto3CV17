@@ -1,29 +1,50 @@
 create database actividades;
 
 use actividades;
-
+/****************************************CREACION DE LA TABLA DE USUARIOS***********************************************/
 create table usuarios (
 idUsuario integer auto_increment primary key, email varchar(100) not null unique, nombreUsuario varchar(150) not null unique,
-passwordUser varchar(100) not null unique, foto longblob, index(email)  
+passwordUser varchar(100) not null unique, foto varchar(500)  
 );
+
+/********************************************crear el index con el email para realizar las busquedas mas rapido************************************/
 create unique index emailUserIndex on usuarios(email);
-/*El usuario dependiente es el usurio que tiene un usuario padre o  que los puede controlar*/
+
+/*El usuario dependiente es el usurio que tiene un usuario padre o  que los puede controlar, creacion de tabla usuario dependiente**************/
+
 create table usuarioDependiente (						
 idUsuario integer, idUsuarioDep integer, primary key(idUsuario, idUsuarioDep), foreign key(idUsuario) references usuarios (idUsuario) 
 on delete cascade on update cascade, foreign key(idUsuarioDep) references usuarios (idUsuario) on delete cascade on update cascade
 );
+
+/*********************************************************CREACION DE TABLA TAREA****************************************************************/
+
 create table tarea (
 idTarea integer auto_increment primary key, nombreTarea varchar(100) not null unique, valorPuntos bigint not null, fechaHora datetime not null
 );
+
+/*********************************************************CREACION DE INDEX CON EL NOMBRE DE LA TAREA*********************************************/
+
 create unique index tareandexNombre on tarea(nombreTarea);
+
+/********************************************************************CREACION DE TABLA TAREAREALIZADA*******************************************/
+
 create table tareaRealizada (
 idTarea integer, idUsuario integer, primary key(idTarea, idUsuario), avancePuntos bigint, foreign key(idTarea) references tarea (idTarea)
 on delete cascade on update cascade, foreign key(idUsuario) references usuarios(idUsuario) on delete cascade on update cascade 
 );
+/******************************************************CREACION DE LA TABLA DE RECOMPENSA***********************************************************/
+
 create table recompensa (
-idRecompensa integer auto_increment primary key, nombreRecompensa varchar(100) not null unique, puntosCuesta bigint not null, foto longblob
-);
+idRecompensa integer auto_increment primary key, nombreRecompensa varchar(100) not null unique, puntosCuesta bigint not null, 
+fechaHora datetime not null, foto longblob);
+
+/***************************************************CREACION DE INDEX NOMBRE RECOMPENSA****************************************************************/
+
 create unique index indexRecompensa on recompensa(nombreRecompensa);
+
+/************************************************ CREACION DE TABLA DE RECOMPENSAUSUARIO******************************************************************/
+
 create table recompensaUsuario (
 idRecompensa integer, idUsuario integer, primary key(idRecompensa, idUsuario), foreign key(idRecompensa) references recompensa(idRecompensa)
 on delete cascade on update cascade, foreign key(idUsuario) references usuarios(idUsuario) on delete cascade on update cascade
@@ -47,42 +68,80 @@ insert into tarea (nombreTarea, valorPuntos, fechaHora) values("tarea1", 525689,
 commit;
 
 start transaction;
-insert into tareaRealizada values (1, 1, 10), (2, 2, 100), (3, 3, 10);
+insert into tareaRealizada values (1, 1, 1), (2, 3, 2), (4, 5, 3);
 commit;
 
 start transaction;
-insert into recompensa (nombreRecompensa, puntosCuesta, foto) values ("exito", 1000, null), ("exito2", 2000, null), ("exito3", 3000, null), ("exito4", 4000, null),
-("exito5", 5000, null);
+insert into recompensa (nombreRecompensa, puntosCuesta, fechaHora, foto) values ("exito", 1000, "2022-05-03 22:17:05", null), ("exito2", 2000, "2022-07-23 23:23:23", null), 
+("exito3", 3000, "2022-12-12 22:22:22", null), ("exito4", 4000, "2012-12-12 10:10:10", null), ("exito5", 5000, "2010-10-10 07:07:07", null);
 commit;
 
 start transaction;
 insert into recompensaUsuario values (1, 1), (2, 2), (3, 3);
 commit;
 
-/*Consultas de select de prueba*/
-
-select * from usuarios;
-select * from usuarioDependiente;
-select * from tarea;
-select * from tareaRealizada;
-select * from recompensa;
-select * from recompensaUsuario;
-
 /*CONSULTAS PARA USAR EN FUNCIONES ESPECIFICAS PHP*/
+
+
 /*MOSTRAR DATOS PANTALLA USERS*/
 
 /*CON ESTA CONSULTA DESPLEGAMOS EL EMAIL DEL USUARIO, EL NOMBRE DEL USUARIO Y LA FOTO DEL USUARIO
 CON ELLO DESPLEGAMOS LAS TAREAS QUE TIENE ASIGNADAS COMO EL NOMBRE DE LA TAREA, EL VALOR QUE TIENE EN PUNTOS LA TAREA, LA FECHA EN QUE SE REGISTRO LA TAREA
 Y POR ULTIMO DESPLEGAMOS LOS PUNTOS QUE EL USUARIO LLEVA CUMPLIDOS PARA LOGRAR LA RECOMPENSA DE DICHA TAREA
-SE UTILIZA LA BUSQUEDA CON EL EMAIL DEL USUARIO YA QUE TIENE UN INDEX Y LO HACE MAS RAPIDO*/
+SE UTILIZA LA BUSQUEDA CON EL EMAIL DEL USUARIO YA QUE TIENE UN INDEX Y LO HACE MAS RAPIDO
+*******************************************************SIRVE PARA LA PANTALLA DE USUARIOS************************************************************************/
 
-select u.email, u.nombreUsuario, u.foto, tR.avancePuntos, t.nombreTarea, t.valorPuntos, t.fechaHora from 
+select u.idUsuario ,u.email, u.nombreUsuario, u.foto, tR.avancePuntos, t.idTarea, t.nombreTarea, t.valorPuntos, t.fechaHora from 
 (usuarios u inner join tareaRealizada tR on u.idUsuario = tR.idUsuario) inner join tarea t on t.idTarea = tR.idTarea
 where u.email = "example1@example.com";
 
-/*AÑADIR USUARIOS QUE DEPENDEN DE OTRO*/
+/*PANTALLA DE TASK*/
 
-create table usuarioDependiente (						
-idUsuario integer, idUsuarioDep integer, primary key(idUsuario, idUsuarioDep), foreign key(idUsuario) references usuarios (idUsuario) 
-on delete cascade on update cascade, foreign key(idUsuarioDep) references usuarios (idUsuario) on delete cascade on update cascade
-);
+/*ORDENA LAS TAREAS POR NOMBRE DE MAYOR A MENOR*/
+select * from tarea order by nombreTarea desc;
+/*ORDENA LAS TAREAS POR NOMBRE DE MENOR A MAYOR*/
+select * from tarea order by nombreTarea asc;
+
+/*ORDENA LAS TAREAS POR valor de puntos DE MAYOR A MENOR*/
+select * from tarea order by valorPuntos desc;
+/*ORDENA LAS TAREAS POR valor de puntos DE MENOR A MAYOR*/
+select * from tarea order by valorPuntos asc;
+
+/*ORDENA LAS TAREAS POR fecha hora creacion DE MAYOR A MENOR*/
+select * from tarea order by date(fechaHora) desc, time(fechaHora) desc;
+/*ORDENA LAS TAREAS POR fecha hora creacion DE MENOR A MAYOR*/
+select * from tarea order by date(fechaHora) asc, time(fechaHora) asc;
+
+
+/*MOSTRAR TAREAS CON LOS USUARIOS ASIGNADOS A ESA TAREA*/
+
+/*CON ESTA CONSULTA DESPLEGAMOS EL EMAIL DEL USUARIO, EL NOMBRE DEL USUARIO Y LA FOTO DEL USUARIO
+CON ELLO DESPLEGAMOS LAS TAREAS QUE TIENE ASIGNADAS COMO EL NOMBRE DE LA TAREA, EL VALOR QUE TIENE EN PUNTOS LA TAREA, LA FECHA EN QUE SE REGISTRO LA TAREA
+Y POR ULTIMO DESPLEGAMOS LOS PUNTOS QUE EL USUARIO LLEVA CUMPLIDOS PARA LOGRAR LA RECOMPENSA DE DICHA TAREA
+SE UTILIZA LA BUSQUEDA CON EL EMAIL DEL USUARIO YA QUE TIENE UN INDEX Y LO HACE MAS RAPIDO
+*******************************************************SIRVE PARA LA PANTALLA DE TAREAS************************************************************************/
+
+select u.idUsuario, u.email, u.nombreUsuario, u.foto, tR.avancePuntos, t.idTarea, t.nombreTarea, t.valorPuntos, t.fechaHora from 
+(usuarios u inner join tareaRealizada tR on u.idUsuario = tR.idUsuario) inner join tarea t on t.idTarea = tR.idTarea
+where u.email = "example1@example.com";
+
+/***********************************************************PANTALLA DE RECOMPENSAS**********************************************************************************/
+
+/*SE HACE LA RELACION DE RECOMPENSAS CON LOS USUARIOS MEDIANTE EL NOMBRE DE LA RECOMPENSA QUE ES MAS RAPIDO POR EL INDEX*/
+
+select r.idRecompensa, r.nombreRecompensa, r.puntosCuesta, r.fechaHora, r.foto, u.idUsuario, u.email, u.nombreUsuario, u.foto from 
+(recompensa r inner join recompensaUsuario rU on r.idRecompensa = rU.idRecompensa) inner join usuarios u on u.idUsuario = rU.idUsuario
+where r.nombreRecompensa = "exito";
+
+/*SE HACE EL ORDEN POR MEDIO DE EL NOMBRE DE LA RECOMPENSA DE MAYOR A MENOR*/
+select * from recompensa order by nombreRecompensa desc;
+/*SE HACE EL ORDEN POR MEDIO DE EL NOMBRE DE LA RECOMPENSA DE MENOR A MAYOR*/
+select * from recompensa order by nombreRecompensa asc;
+/*SE HACE EL ORDEN POR MEDIO DE LOS PUNTOS QUE CUESTA LA RECOMPENSA DE MAYOR A MENOR*/
+select * from recompensa order by puntosCuesta desc;
+/*SE HACE EL ORDEN POR MEDIO DE LOS PUNTOS QUE CUESTA LA RECOMPENSA DE MENOR A MAYOR*/
+select * from recompensa order by puntosCuesta asc;
+/*SE HACE EL ORDEN por medio de la fechaHOra en  RECOMPENSA DE MAYOR A MENOR*/
+select * from recompensa order by date(fechaHora) desc, time(fechaHora) desc;
+/*SE HACE EL ORDEN por medio de la fechaHOra en  RECOMPENSA DE MENOR A MAYOR*/
+select * from recompensa order by date(fechaHora) asc, time(fechaHora) asc;
