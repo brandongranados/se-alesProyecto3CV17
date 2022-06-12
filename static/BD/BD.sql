@@ -20,7 +20,8 @@ on delete cascade on update cascade, foreign key(idUsuarioDep) references usuari
 /*********************************************************CREACION DE TABLA TAREA****************************************************************/
 
 create table tarea (
-idTarea integer auto_increment primary key, nombreTarea varchar(100) not null unique, valorPuntos bigint not null, fechaHora datetime not null
+idTarea integer auto_increment, idUsuario integer, nombreTarea varchar(100) not null unique, valorPuntos bigint not null, fechaHora datetime not null, 
+primary key(idTarea, idUsuario), foreign key(idUsuario) references usuarios (idUsuario) on delete cascade on update cascade
 );
 
 /*********************************************************CREACION DE INDEX CON EL NOMBRE DE LA TAREA*********************************************/
