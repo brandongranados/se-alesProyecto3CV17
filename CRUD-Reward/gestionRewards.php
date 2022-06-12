@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Servicios</title>
+	<title>Rewards</title>
 	<link rel="stylesheet" type="text/css" href="./static/librerias/bootstrap/css/bootstraps.css">
 	<link rel="stylesheet" type="text/css" href="./static/librerias/alertifyjs/css/alertify.css">
 	<script src="./static/js/funciones.js"></script>
