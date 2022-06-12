@@ -42,12 +42,14 @@
           <h4 class="modal-title" id="myModalLabel">Agrega nueva Recompensa</h4>
         </div>
         <div class="modal-body">
-          <form  action="rewards.php"  method="post">
+          <form  action="rewards.php"  method="post" enctype="multipart/form-data">
               <label></label>
               <label>Nombre de la recompensa</label>
               <input type="text" name="nombre" id="nombre"  maxlength="100" required>
               <label>Puntos por hacer la tarea</label>
-              <input type="number" name="valor" id="valor"  required>  
+              <input type="number" name="valor" id="valor"  required> 
+              <label>Imagen</label>
+              <input type="file" name="imagen" id="imagen" class="form-control input-sm"> 
         </div>
         <div class="modal-footer">
             <input type="submit" class="btn btn-primary" value="Agregar">
@@ -66,12 +68,14 @@
           <h4 class="modal-title" id="myModalLabel">Editar una Recompensa</h4>
         </div>
         <div class="modal-body">
-          <form  action="modificarReward.php"  method="post">
+          <form  action="modificarReward.php"  method="post" enctype="multipart/form-data">
               <input type="text" hidden=""  id="ids" name="idRewards">
               <label>Nombre de la recompensa</label>
               <input type="text" id="nombre" name="nombre" class="uwu sin_borde"  required >    
               <label>Puntos por hacer la tarea</label>
               <input type="number" name="valor" id="valor" class="form-control input-sm" required>
+              <label>Imagen</label>
+              <input type="file" name="imagen" id="imagen" class="form-control input-sm">
         </div>
         <div class="modal-footer">
         <input type="submit" class="btn btn-warning" value="Modificar">

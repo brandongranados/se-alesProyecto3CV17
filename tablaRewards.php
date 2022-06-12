@@ -18,25 +18,27 @@
                         </button>
                     </caption>
                     <tr class="PrincipalesT Uno">
-                        <td>Nombre</td>
-                        <td>Puntos que cuesta</td>
-                        <td>Fecha de publicaci&oacute;n</td>
-                        <td>Editar</td>
-                        <td>Eliminar</td>
+                        <th>Nombre</th>
+                        <th>Puntos que cuesta</th>
+                        <th>Fecha de publicaci&oacute;n</th>
+                        <th></th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                     <?php while ($row = mysqli_fetch_array($resultado)) {
                       $datas =$row['idRecompensa']."||".$row['nombreRecompensa']."||".$row['puntosCuesta']."||".$row['fechaHora'];
                       ?>
 
                       <tr>
-                        <td style="width:30%;" valign="middle"><?php echo $row['nombreRecompensa']; ?></td>
-                        <td style="width:14%;" valign="middle"><?php echo $row['puntosCuesta']; ?></td>
-                        <td style="width:20%;" valign="middle"><?php echo $row['fechaHora']; ?></td>
-                        <td style="width:10%;">
+                        <td style="width:30%; vertical-align: middle;" ><?php echo $row['nombreRecompensa']; ?></td>
+                        <td style="width:14%; vertical-align: middle;"><?php echo $row['puntosCuesta']; ?></td>
+                        <td style="width:20%; vertical-align: middle;"><?php echo $row['fechaHora']; ?></td>
+                        <td style="width:30%; vertical-align: middle;"><img style="width:50%; height:60%;" src="<?php echo $row['foto']; ?>">
+                        <td style="width:10%; vertical-align: middle;">
                             <button class="btn-warning btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="agregaform('<?php echo $datas ?>')">
                             </button>
                         </td>
-                        <td style="width:10%;">
+                        <td style="width:10%; vertical-align: middle;">
                             <button class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#modalEliminar" onclick="preguntarSiNo('<?php echo $datas ?>')"> </button>
                         </td>
                     <?php }?>

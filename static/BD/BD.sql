@@ -37,7 +37,7 @@ on delete cascade on update cascade, foreign key(idUsuario) references usuarios(
 
 create table recompensa (
 idRecompensa integer auto_increment primary key, nombreRecompensa varchar(100) not null unique, puntosCuesta bigint not null, 
-fechaHora datetime not null, foto longblob);
+fechaHora datetime not null, foto varchar(500));
 
 /***************************************************CREACION DE INDEX NOMBRE RECOMPENSA****************************************************************/
 
