@@ -10,13 +10,12 @@
             $idUsuario= $fila3['idUsuario'];
         }
     }
-    $consulta ="SELECT *FROM tarea WHERE idUsuario = '$idUsuario'";
-    $resultado = mysqli_query($conexion, $consulta);
+    $resultado = mysqli_query($conexion,"SELECT *FROM tarea WHERE idUsuario = '$idUsuario'");    
 ?>
   
 <div class="row">
             <div class="col-sm-12">
-              <h2>Tareas</h2>
+              <h2 style="text-align: center;">Tareas</h2>
                 <table class="table table-hover table-condensed table-bordered text-center">
                     <caption>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo">
@@ -25,11 +24,11 @@
                         </button>
                     </caption>
                     <tr class="PrincipalesT Uno">
-                        <td>Nombre</td>
-                        <td>Valor en Puntos</td>
-                        <td>Fecha de publicaci&oacute;n</td>
-                        <td>Editar</td>
-                        <td>Eliminar</td>
+                        <th>Nombre</th>
+                        <th>Valor en Puntos</th>
+                        <th>Fecha de publicaci&oacute;n</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                     <?php while ($row = mysqli_fetch_array($resultado)) {
                       $datas =$row['idTarea']."||".$row['nombreTarea']."||".$row['valorPuntos']."||".$row['fechaHora'];

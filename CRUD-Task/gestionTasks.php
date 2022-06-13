@@ -28,7 +28,17 @@
 </head>
 <body>
 <header class="encabe">
-</header>
+        <div class="Logo">
+            <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+        </div>
+        <nav>
+            <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
+            <li><a class="navText" href="../USER/homeUser.php"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="../USER/rewardUser.php"><span > Recompensas </span></a></li>    
+            <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
+        </nav>
+    </header>
+<br>
 <div class="container">
       <div id="buscador"></div>
 		  <div id="tabla"></div>

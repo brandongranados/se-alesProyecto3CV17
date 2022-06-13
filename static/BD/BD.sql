@@ -31,7 +31,7 @@ create unique index tareandexNombre on tarea(nombreTarea);
 /********************************************************************CREACION DE TABLA TAREAREALIZADA*******************************************/
 
 create table tareaRealizada (
-idTarea integer, idUsuario integer, primary key(idTarea, idUsuario), avancePuntos bigint, foreign key(idTarea) references tarea (idTarea)
+idTarea integer, idUsuario integer, primary key(idTarea, idUsuarioDep), avancePuntos bigint, foreign key(idTarea) references tarea (idTarea)
 on delete cascade on update cascade, foreign key(idUsuario) references usuarios(idUsuario) on delete cascade on update cascade 
 );
 /******************************************************CREACION DE LA TABLA DE RECOMPENSA***********************************************************/
