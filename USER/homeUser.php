@@ -1,26 +1,17 @@
 <?php
-    session_start();
-    $usuarioDep = $_SESSION['correo'];
-    
     include "../conexion.php";
-    if(isset($_POST['buscar'])){
-        $servicio = $_POST['servicio'];
-        if(empty($_POST['servicio'])){
-            $resultado = mysqli_query($conexion, "SELECT *FROM tarea ");
-        }elseif($servicio == "MR"){
-            $resultado = mysqli_query($conexion, "SELECT *FROM tarea order by date(fechaHora) desc, time(fechaHora) desc");
-        }elseif($servicio == "MA"){
-            $resultado = mysqli_query($conexion, "SELECT *FROM tarea order by date(fechaHora) asc, time(fechaHora) asc");
-        }elseif($servicio == "MV"){
-            $resultado = mysqli_query($conexion, "SELECT *FROM tarea order by valorPuntos desc");
-        }elseif($servicio == "MEV"){
-            $resultado = mysqli_query($conexion, "SELECT *FROM tarea order by valorPuntos asc");
-        }
-
-    }else{
-        $resultado = mysqli_query($conexion, "SELECT *FROM tarea ");
+    session_start();
+    $usuario = $_SESSION['correo'];
+    $contrasenia = $_SESSION['pass']    ;
+    //Obtenemos datos de la BD
+	$consultaempl ="SELECT*FROM usuarios where email = '$usuario' and passwordUser = '$contrasenia' ";
+	$resultadoemp = mysqli_query($conexion, $consultaempl);
+	$filasempl = mysqli_num_rows($resultadoemp);
+    if($filasempl){   
+		$fila=mysqli_fetch_array($resultadoemp);
+		$idAdmin = $fila['idUsuario'];
     }
-     
+    $resultado = mysqli_query($conexion, "SELECT * FROM usuarios usu JOIN usuariodependiente uD ON uD.idUsuarioDep = usu.idUsuario WHERE uD.idUsuario ='$idAdmin'");
     mysqli_close($conexion);
 ?>
 <!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -40,7 +31,7 @@
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="./homeUser.php"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="./taskUser.php"><span > Tareas </span></a></li>    
             <li><a class="navText" href="./rewardUser.php"><span > Recompensas </span></a></li>    
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
@@ -51,32 +42,20 @@
         <br><br>
         <div class="store-wrapper">
         <div class="category_list">
-        <form method="post">
-            <select name="servicio">
-                <option value=""></option>
-                <option value="MR">M&aacute;s recientes</option>
-                <option value="MA">M&aacute;s antiguas</option>
-                <option value="MV">Mayor valor</option>
-                <option value="MEV">Menor valor</option>
-            </select>
-            <button name="buscar" type="submit">Buscar</button>
-        </form>
+        
         <br><br>
-                <a href="../CRUD-Task/gestionTasks.php" class="category_item" category="ordenadores">Agregar Tarea</a>
+                <a href="../CRUD-Task/gestionTasks.php" class="category_item" category="ordenadores">Agregar Usuario</a>
               
             </div>
             <div class="products-list">
                 <?php while ($row = mysqli_fetch_array($resultado)) {?>
                     <div class='product-item'>
-                    <h4 class='text-center ' style="color: #686767; bold;"><?php echo $row['nombreTarea']; ?></h3>
+                    <img class="pro" src="<?php echo $row['foto']; ?>">    
                         <div class='item-text'>
                         <label class="proLab">Nombre:</label>
-                            <label class="proLab"><?php echo $row['nombreTarea']; ?></label>
-                            <label class="proLab">Puntos que vale:</label>
-                            <label class="proLab"><?php echo $row['valorPuntos']; ?></label>
-                            <label class="proLab">Fecha y Hora:</label>
-                            <label class="proLab"><?php echo $row['fechaHora']; ?></label>
-                            
+                            <label class="proLab"><?php echo $row['nombreUsuario']; ?></label>
+                            <label class="proLab">Puntos del Usuario:</label>
+                            <label class="proLab"><?php echo $row['puntosUsuario']; ?></label>
                         </div>
                     </div>
                 <?php }

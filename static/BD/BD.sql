@@ -13,7 +13,7 @@ create unique index emailUserIndex on usuarios(email);
 /*El usuario dependiente es el usurio que tiene un usuario padre o  que los puede controlar, creacion de tabla usuario dependiente**************/
 
 create table usuarioDependiente (						
-idUsuario integer, idUsuarioDep integer, primary key(idUsuario, idUsuarioDep), foreign key(idUsuario) references usuarios (idUsuario) 
+idUsuario integer, idUsuarioDep integer, puntosUsuario integer, primary key(idUsuario, idUsuarioDep), foreign key(idUsuario) references usuarios (idUsuario) 
 on delete cascade on update cascade, foreign key(idUsuarioDep) references usuarios (idUsuario) on delete cascade on update cascade
 );
 

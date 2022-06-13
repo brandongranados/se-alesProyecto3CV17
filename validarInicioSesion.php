@@ -1,5 +1,5 @@
 <?php
-require_once "../conexion.php";
+require_once "./conexion.php";
 $usuario = $_POST['correo'];
 $contrasenia = $_POST['pass'];
 session_start();
@@ -9,7 +9,7 @@ $consulta = "SELECT *FROM usuarios where email = '$usuario' and passwordUser = '
 $resultado = mysqli_query($conexion, $consulta);
 $filas = mysqli_num_rows($resultado);
 if($filas){
-        header("location:./ADMIN/homeAdmin.php");  
+        header("location:./USER/homeuser.php");  
 }else{
     //Si no esta regisrado mandamos mensaje diciendo que las credenciales son incorrectas
     ?>
