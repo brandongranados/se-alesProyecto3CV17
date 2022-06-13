@@ -31,7 +31,7 @@ create unique index tareandexNombre on tarea(nombreTarea);
 /********************************************************************CREACION DE TABLA TAREAREALIZADA*******************************************/
 
 create table tareaRealizada (
-idTarea integer, idUsuario integer, primary key(idTarea, idUsuarioDep), avancePuntos bigint, foreign key(idTarea) references tarea (idTarea)
+idTarea integer, idUsuario integer, primary key(idTarea, idUsuarioDep), avancePuntos bigint, estatus varchar(150), foreign key(idTarea) references tarea (idTarea)
 on delete cascade on update cascade, foreign key(idUsuario) references usuarios(idUsuario) on delete cascade on update cascade 
 );
 /******************************************************CREACION DE LA TABLA DE RECOMPENSA***********************************************************/
@@ -69,7 +69,7 @@ insert into tarea (nombreTarea, valorPuntos, fechaHora, idUsuario) values("tarea
 commit;
 
 start transaction;
-insert into tareaRealizada values (1, 1, 1), (2, 3, 2), (4, 5, 3);
+insert into tareaRealizada values (1, 1, 1, "activo"), (2, 3, 2, "activo"), (4, 5, 3, "activo");
 commit;
 
 start transaction;
