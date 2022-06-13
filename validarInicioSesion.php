@@ -1,10 +1,12 @@
 <?php
 require_once "./conexion.php";
+$tipoUser = $_POST['ids'];
 $usuario = $_POST['correo'];
 $contrasenia = $_POST['pass'];
 session_start();
 $_SESSION['correo'] = $usuario;
 $_SESSION['pass'] = $contrasenia;
+$_SESSION['tipoUser'] = $tipoUser;
 $consulta = "SELECT *FROM usuarios where email = '$usuario' and passwordUser = '$contrasenia' ";
 $resultado = mysqli_query($conexion, $consulta);
 $filas = mysqli_num_rows($resultado);

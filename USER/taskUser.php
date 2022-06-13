@@ -1,6 +1,7 @@
 <?php
     include "../conexion.php";
     session_start();
+    $tipoUser = $_SESSION['tipoUser'];
     $usuarioDep = $_SESSION['correo'];
     $usuario = $_SESSION['correo'];
     $contrasenia = $_SESSION['pass']    ;
@@ -45,7 +46,8 @@
 <body>
 <header class="encabe">
         <div class="Logo">
-            <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+            <a class="navText" href="<?php if($tipoUser == "Admin"){
+                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
@@ -71,8 +73,12 @@
             <button name="buscar" type="submit">Buscar</button>
         </form>
         <br><br>
-                <a href="../CRUD-Task/gestionTasks.php" class="category_item" category="ordenadores">Agregar Tarea</a>
-              
+        <?php
+                if($tipoUser == "Admin"){?>
+                    <a href="../CRUD-Task/gestionTasks.php" class="category_item" category="ordenadores">Agregar Tarea</a>
+        <?php
+                }
+        ?>
             </div>
             <div class="products-list">
                 <?php while ($row = mysqli_fetch_array($resultado)) {?>
@@ -97,7 +103,6 @@
 <br><br>
     <footer>
         <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
-            <span class="text-secondary w-100 text-center">Itzamara Store &copy; 2021</span>
         </div>
     </footer>
     

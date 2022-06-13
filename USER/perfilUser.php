@@ -2,6 +2,7 @@
  //Realizamos conexion y solicitamos datos del inicio de sesion
 	session_start();
 	require_once "../conexion.php";
+	$tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
 	$_SESSION['correo'] = $usuario;
@@ -41,8 +42,9 @@
 	</head>
   <body>
   <header class="encabe">
-        <div class="Logo">
-            <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+  		<div class="Logo">
+            <a class="navText" href="<?php if($tipoUser == "Admin"){
+                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
@@ -78,12 +80,18 @@
 										<p class="text-muted"> <?php echo $rEmail ?></p>
 									</div>
 								</div>
+								<?php
+									if($tipoUser == "Usuario"){
+								?>
                                 <div class="row pt-1">
 									<div class="col-12 mb-3">
 										<h6>Puntos</h6>
 										<p class="text-muted"> <?php echo $Puntos ?></p>
 									</div>
 								</div>
+								<?php
+									}
+									?>
 							</div>
 						</div>
 						<div class="col-md-4 gradient-custom text-center text-white"
@@ -92,7 +100,7 @@
 							<i class="far fa-edit mb-5"></i>
 							<div class="row pt-1">
 								<div class="col-12 mb-3">
-		  							<a class="btn btn-primary" href="./modifContratante.php">Modificar datos</a>
+		  							<a class="btn btn-primary" href="./modificarUser.php">Modificar datos</a>
 								</div>
 							</div>
 							

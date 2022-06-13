@@ -1,7 +1,7 @@
 <?php
     include "../conexion.php";
     session_start();
-    $usuarioDep = $_SESSION['correo'];
+    $tipoUser = $_SESSION['tipoUser'];
     $usuario = $_SESSION['correo'];
     $contrasenia = $_SESSION['pass']    ;
     //Obtenemos datos de la BD
@@ -45,7 +45,8 @@
 <body>
 <header class="encabe">
         <div class="Logo">
-            <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+            <a class="navText" href="<?php if($tipoUser == "Admin"){
+                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
@@ -71,7 +72,13 @@
             <button name="buscar" type="submit">Buscar</button>
         </form>
         <br><br>
-                <a href="../CRUD-Reward/gestionRewards.php" class="category_item" category="ordenadores">Agregar Recompensa</a>
+            <?php
+                if($tipoUser == "Admin"){?>
+                   <a href="../CRUD-Reward/gestionRewards.php" class="category_item" category="ordenadores">Agregar Recompensa</a>
+            <?php
+                }
+            ?>
+                
               
             </div>
         
