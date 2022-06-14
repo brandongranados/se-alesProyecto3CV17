@@ -4,7 +4,7 @@
   $tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
-  $resultado = mysqli_query($conexion, "SELECT idUsuario, nombreUsuario FROM usuarios ORDER BY nombreUsuario ASC"); 
+  $resultado = mysqli_query($conexion, "SELECT idUsuario, nombreUsuario FROM usuarios WHERE email != '$usuario' ORDER BY nombreUsuario ASC"); 
   mysqli_close($conexion);
 
 ?>
