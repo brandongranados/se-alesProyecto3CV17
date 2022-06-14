@@ -45,7 +45,7 @@
         <div class="category_list">
         
         <br><br>
-                <a href="../CRUD-Task/gestionTasks.php" class="category_item" category="ordenadores">Agregar Usuario</a>
+                <a href="../CRUD-Usuarios/gestionUsuario.php" class="category_item" category="ordenadores">Agregar Usuario</a>
               
             </div>
             <div class="products-list">

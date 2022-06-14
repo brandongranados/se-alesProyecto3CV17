@@ -25,7 +25,9 @@
     if($filas){   
         $filas = mysqli_fetch_array($resultado);
 		$Puntos = $filas['puntosUsuario'];
-    }
+    }else{
+		$Puntos = "0";
+	}
 ?>
 
 <!DOCTYPE html>

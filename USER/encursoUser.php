@@ -7,7 +7,7 @@
         $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
         $filasemp3 = mysqli_num_rows($resultadoemp3);    
     }else{
-        $consultaemp3 ="SELECT ud.idUsuarioDep, tr.idTarea FROM usuariodependiente ud JOIN tarearealizada tr ON ud.idUsuarioDep = tr.idUsuario  WHERE ud.idUsuario =  '$rIdContratante'";
+        $consultaemp3 ="SELECT * FROM usuariodependiente ud JOIN tarearealizada tr ON ud.idUsuarioDep = tr.idUsuario  WHERE ud.idUsuario =  '$rIdContratante'";
         $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
         $filasemp3 = mysqli_num_rows($resultadoemp3);    
     }
