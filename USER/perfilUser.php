@@ -19,7 +19,7 @@
 		$rEmail = $fila['email'];
 		$rFoto=$fila['foto'];
     }
-    $consulta ="SELECT*FROM usuariodependiente where idUsuarioDep = '$rIdContratante'";
+	$consulta ="SELECT*FROM usuariodependiente where idUsuarioDep = '$rIdContratante'";
     $resultado = mysqli_query($conexion, $consulta);
 	$filas = mysqli_num_rows($resultado);
     if($filas){   
@@ -47,9 +47,9 @@
                     echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
-            <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="./taskUser.php"><span > Tareas </span></a></li>    
-            <li><a class="navText" href="./rewardUser.php"><span > Recompensas </span></a></li>    
+		<li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
     </header>
@@ -94,8 +94,7 @@
 									?>
 							</div>
 						</div>
-						<div class="col-md-4 gradient-custom text-center text-white"
-							style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+						<div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
 							<img src="<?php echo $rFoto?>" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
 							<i class="far fa-edit mb-5"></i>
 							<div class="row pt-1">
@@ -113,7 +112,15 @@
     
     <div class="card mt-5 mb-5" style="max-width:500px;margin:auto;">
         <div class="card-body text-center" >
-			<h1 class="h3 mb-3">Actividades de usuarios en curso</h1>
+			<?php
+			if($tipoUser == "Admin"){
+				echo '<h1 class="h3 mb-3">Tareas de usuarios en curso</h1>';
+			}else{
+				echo '<h1 class="h3 mb-3">Tareas en curso</h1>';
+			}
+			
+			?>
+			
 			<hr>
 			<?php 
 			include('encursoUser.php');

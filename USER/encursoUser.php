@@ -1,9 +1,16 @@
 <?php
     require_once "../conexion.php";
+    $tipoUser = $_SESSION['tipoUser'];
     //Se obtienen las tareas de sus dependientes
-    $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='activo'";
-	$resultadoemp3 = mysqli_query($conexion, $consultaemp3);
-	$filasemp3 = mysqli_num_rows($resultadoemp3);
+    if($tipoUser == "Usuario"){
+        $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='activo'";
+        $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
+        $filasemp3 = mysqli_num_rows($resultadoemp3);    
+    }else{
+        $consultaemp3 ="SELECT ud.idUsuarioDep, tr.idTarea FROM usuariodependiente ud JOIN tarearealizada tr ON ud.idUsuarioDep = tr.idUsuario  WHERE ud.idUsuario =  '$rIdContratante'";
+        $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
+        $filasemp3 = mysqli_num_rows($resultadoemp3);    
+    }
     
     if($filasemp3 > 0){ 
     while($fila3 = mysqli_fetch_array($resultadoemp3)) {
@@ -19,7 +26,7 @@
             $fila=mysqli_fetch_array($resultadoemp);
             $rNombreC= $fila['nombreUsuario'];
         }
-        //Obtener nombre y precio del servicio
+        //Obtener nombre y valor de la tarea
         $consultaempl ="SELECT * FROM tarea where idTarea='$rIdTarea' ";
         $resultadoemp = mysqli_query($conexion, $consultaempl);
         $filasempl = mysqli_num_rows($resultadoemp);
@@ -40,6 +47,6 @@
       }
     }
     else
-    echo "<p>No hay Servicios activos</p>";
+    echo "<p>No hay Tareas activas</p>";
 
     ?>

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	require_once "../conexion.php";
-	
+	$tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
 
@@ -33,8 +33,8 @@
         </div>
         <nav>
             <li><a class="navText" href="../USER/perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="../USER/homeUser.php"><span > Tareas </span></a></li>    
-            <li><a class="navText" href="../USER/rewardUser.php"><span > Recompensas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "./gestionTasks.php";}else{echo "../USER/taskUser.php";}?>"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "../CRUD-Reward/gestionRewards.php";}else{echo "../USER/rewardUser.php";}?>"><span > Recompensas </span></a></li> 
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
     </header>

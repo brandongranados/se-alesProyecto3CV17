@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once "../conexion.php";
+  $tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
   $resultado = mysqli_query($conexion, "SELECT idUsuario, nombreUsuario FROM usuarios ORDER BY nombreUsuario ASC"); 
@@ -36,9 +37,9 @@
             <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
-            <li><a class="navText" href="../USER/perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="../USER/homeUser.php"><span > Tareas </span></a></li>    
-            <li><a class="navText" href="../USER/rewardUser.php"><span > Recompensas </span></a></li>    
+        <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "../CRUD-Task/gestionTasks.php";}else{echo "../USER/taskUser.php";}?>"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "./gestionRewards.php";}else{echo "../USER/rewardUser.php";}?>"><span > Recompensas </span></a></li> 
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
     </header>

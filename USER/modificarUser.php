@@ -23,9 +23,9 @@
                     echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
         </div>
         <nav>
-            <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="./taskUser.php"><span > Tareas </span></a></li>    
-            <li><a class="navText" href="./rewardUser.php"><span > Recompensas </span></a></li>    
+        <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
     </header>
@@ -41,7 +41,7 @@
 
                         <label for="Email" class="inicia">Correo electr&oacute;nico</label>
                         <br>
-                        <input type="text"class="inicia form-control" value="<?php echo $row['email']?>" name="email" id="email" placeholder="Ingresa tu correo electr&oacute;nico" disable/>
+                        <input type="text"class="inicia form-control" value="<?php echo $row['email']?>" name="email" id="email" placeholder="Ingresa tu correo electr&oacute;nico" disabled/>
                         <br>
 
                         <label class="inicia" for="imagen" >Imagen de perfil</label>

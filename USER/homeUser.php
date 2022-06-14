@@ -1,8 +1,9 @@
 <?php
     include "../conexion.php";
     session_start();
+    $tipoUser = $_SESSION['tipoUser'];
     $usuario = $_SESSION['correo'];
-    $contrasenia = $_SESSION['pass']    ;
+    $contrasenia = $_SESSION['pass'];
     //Obtenemos datos de la BD
 	$consultaempl ="SELECT*FROM usuarios where email = '$usuario' and passwordUser = '$contrasenia' ";
 	$resultadoemp = mysqli_query($conexion, $consultaempl);
@@ -31,8 +32,8 @@
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
-            <li><a class="navText" href="./taskUser.php"><span > Tareas </span></a></li>    
-            <li><a class="navText" href="./rewardUser.php"><span > Recompensas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
+            <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    
             <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
         </nav>
     </header>
@@ -67,7 +68,7 @@
 <br><br>
     <footer>
         <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
-            <span class="text-secondary w-100 text-center">Itzamara Store &copy; 2021</span>
+            
         </div>
     </footer>
     
