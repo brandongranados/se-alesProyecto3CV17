@@ -73,7 +73,7 @@
         }
         
         if(empty($username_error) && empty($email_error) && empty($contra_error) && empty($contra1_error)){
-            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email) VALUE (?,?,?)";
+            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email, foto) VALUE (?,?,?, null)";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
                 mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_contra, $param_email);
