@@ -14,7 +14,11 @@ if (isset($_POST['idUsuario']) && $_POST['idTarea'] && $_POST['valorPuntos']) {
                 mysqli_stmt_bind_param($stmt, "iiis", $idTarea,$idUsuario,$valorPuntos,$estatus);
                 if(mysqli_stmt_execute($stmt)){
                 }else{
-                    echo "ERROR";
+                    ?>
+                    Swal.fire(
+                        'Fallo en generar la solicitud'
+                        )
+                        <?php
                 }
             }
     

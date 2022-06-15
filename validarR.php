@@ -73,13 +73,14 @@
         }
         
         if(empty($username_error) && empty($email_error) && empty($contra_error) && empty($contra1_error)){
-            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email) VALUE (?,?,?)";
+            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email, foto) VALUE (?,?,?,?)";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
-                mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_contra, $param_email);
+                mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_contra, $param_email,$ruta);
                 $param_username = $username;
                 $param_contra = $contra;
                 $param_email = $email;
+                $ruta = "../static/images/perfil/perfil.jpg";
                 if(mysqli_stmt_execute($stmt)){
                     header("location:index.php");
                 }else{

@@ -15,11 +15,12 @@
     
     if($filasemp3 > 0){ 
     while($fila3 = mysqli_fetch_array($resultadoemp3)) {
+        $idUsuario = $fila3['idUsuario'];
         $rIdTarea= $fila3['idTarea'];
         $rServicio=$fila3['avancePuntos'];
         $rEstatus=$fila3['estatus'];
         //Obtener nombre del empleado
-        $consultaempl ="SELECT * FROM usuarios where idUsuario='$rIdContratante' ";
+        $consultaempl ="SELECT * FROM usuarios where idUsuario='$idUsuario' ";
         $resultadoemp = mysqli_query($conexion, $consultaempl);
         $filasempl = mysqli_num_rows($resultadoemp);
 

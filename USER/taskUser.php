@@ -94,7 +94,7 @@
                             <label class="proLab"><?php echo $row['valorPuntos']; ?> Puntos</label>
                             <label class="proLab">Fecha y Hora:</label>
                             <label class="proLab"><?php echo $row['fechaHora']; ?></label>
-                            <input value='Contratar servicio' onClick='contratar(<?php echo $idAdmin;?>,<?php echo $row['idTarea'];?>,<?php echo $row['valorPuntos'];?>);' type='button' class='btnenviar btn btn-primary' id='ids' name='ids'>
+                            <input value='Empezar tarea' onClick='contratar(<?php echo $idAdmin;?>,<?php echo $row['idTarea'];?>,<?php echo $row['valorPuntos'];?>);' type='button' class='btnenviar btn btn-primary' id='ids' name='ids'>
                         </div>
                     </div>
                 <?php }
@@ -155,9 +155,7 @@
                 }
                 else
                 {
-					Swal.fire(
-					'Fallo en generar la solicitud'
-					)
+					
                 }
            }
        });
