@@ -7,6 +7,7 @@
     $fechayHora = $Object->format("Y-m-d h:i:s a"); 
     $id = $_POST['idRewards'];
     $usuarios =$_POST['usuarios'];
+    $disponible = "si";
     $nombreimagen = $_FILES['imagen']['name'];
     $archivo = $_FILES['imagen']['tmp_name'];
     $tipoImagen = $_FILES['imagen']['type'];
@@ -17,7 +18,7 @@
         $comprobar = mysqli_query($conexion, "SELECT *FROM recompensausuario WHERE idRecompensa = '$id'  and idUsuario = '$usuarioslist'");
         $row = mysqli_fetch_array($comprobar);
         if(empty($row)){
-            $query = "INSERT INTO recompensausuario VALUES ('$id','$usuarioslist')";
+            $query = "INSERT INTO recompensausuario VALUES ('$id','$usuarioslist','$valor','$disponible')";
             $query_run = mysqli_query($conexion, $query);
         }
     }

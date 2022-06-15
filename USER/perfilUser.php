@@ -24,7 +24,17 @@
         $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='finalizado'";
         $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
         $filasemp3 = mysqli_num_rows($resultadoemp3);    
-    }
+		$consulta ="SELECT*FROM recompensausuario where idUsuario = '$rIdContratante' and disponible ='no'";
+        $resultado = mysqli_query($conexion, $consulta);
+        $filas = mysqli_num_rows($resultado);    
+    
+	if($filas > 0){ 
+		while($fila = mysqli_fetch_array($resultado)) {
+			if($tipoUser == "Usuario"){
+				$Puntos -= $fila['puntosCuesta'] ;
+			}
+		}
+	}
 	if($filasemp3 > 0){ 
 		while($fila3 = mysqli_fetch_array($resultadoemp3)) {
 			if($tipoUser == "Usuario"){
@@ -33,7 +43,7 @@
 		}
 	}else{
 		$Puntos = "0";
-	}
+	}}
 ?>
 
 <!DOCTYPE html>

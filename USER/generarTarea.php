@@ -19,6 +19,7 @@ if (isset($_POST['idUsuario']) && $_POST['idTarea'] && $_POST['valorPuntos']) {
             }
     
     echo 1;
+    header("location:taskUser.php");
 
 } else {
 

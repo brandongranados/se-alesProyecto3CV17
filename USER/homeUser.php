@@ -4,6 +4,7 @@
     $tipoUser = $_SESSION['tipoUser'];
     $usuario = $_SESSION['correo'];
     $contrasenia = $_SESSION['pass'];
+    $Puntos = 0;
     //Obtenemos datos de la BD
 	$consultaempl ="SELECT*FROM usuarios where email = '$usuario' and passwordUser = '$contrasenia' ";
 	$resultadoemp = mysqli_query($conexion, $consultaempl);
@@ -12,8 +13,9 @@
 		$fila=mysqli_fetch_array($resultadoemp);
 		$idAdmin = $fila['idUsuario'];
     }
+    
     $resultado = mysqli_query($conexion, "SELECT * FROM usuarios usu JOIN usuariodependiente uD ON uD.idUsuarioDep = usu.idUsuario WHERE uD.idUsuario ='$idAdmin'");
-    mysqli_close($conexion);
+    
 ?>
 <!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="es">
@@ -56,7 +58,27 @@
                         <label class="proLab">Nombre:</label>
                             <label class="proLab"><?php echo $row['nombreUsuario']; ?></label>
                             <label class="proLab">Puntos del Usuario:</label>
-                            <label class="proLab"><?php echo $row['puntosUsuario']; ?></label>
+                            <label class="proLab"><?php 
+                                    $dependiente = $row['idUsuarioDep'];
+                                    $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$dependiente' and estatus ='finalizado'";
+                                    $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
+                                    $filasemp3 = mysqli_num_rows($resultadoemp3);    
+                                    $consulta ="SELECT*FROM recompensausuario where idUsuario = '$dependiente' and disponible ='no'";
+                                    $resultado1 = mysqli_query($conexion, $consulta);
+                                    $filas = mysqli_num_rows($resultado1);    
+                                if($filas > 0){ 
+                                    while($fila = mysqli_fetch_array($resultado1)) {
+                                            $Puntos -= $fila['puntosCuesta'] ;
+                                    }
+                                }
+                                if($filasemp3 > 0){ 
+                                    while($fila3 = mysqli_fetch_array($resultadoemp3)) {
+                                            $Puntos += $fila3['avancePuntos'] ;
+                                    }
+                                }else{
+                                    $Puntos = "0";
+                                }
+                                echo $Puntos; ?></label>
                         </div>
                     </div>
                 <?php }
@@ -74,4 +96,6 @@
     
 </body>
 </html>
-
+<?php
+mysqli_close($conexion);
+?>

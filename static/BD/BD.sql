@@ -48,7 +48,7 @@ create unique index indexRecompensa on recompensa(nombreRecompensa);
 /************************************************ CREACION DE TABLA DE RECOMPENSAUSUARIO******************************************************************/
 
 create table recompensaUsuario (
-idRecompensa integer, idUsuario integer, primary key(idRecompensa, idUsuario), foreign key(idRecompensa) references recompensa(idRecompensa)
+idRecompensa integer, idUsuario integer, puntosCuesta bigint,disponible varchar(10), primary key(idRecompensa, idUsuario), foreign key(idRecompensa) references recompensa(idRecompensa)
 on delete cascade on update cascade, foreign key(idUsuario) references usuarios(idUsuario) on delete cascade on update cascade
 );
 
