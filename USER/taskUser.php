@@ -42,6 +42,10 @@
     <link href="../static/css/style.css" rel="stylesheet" type="text/css">
     <link href="../static/css/agregar.css" rel="stylesheet" type="text/css">
     <link href="../static/css/navegacion.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" 
+		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
 <header class="encabe">
@@ -90,7 +94,7 @@
                             <label class="proLab"><?php echo $row['valorPuntos']; ?> Puntos</label>
                             <label class="proLab">Fecha y Hora:</label>
                             <label class="proLab"><?php echo $row['fechaHora']; ?></label>
-                            
+                            <input value='Contratar servicio' onClick='contratar(<?php echo $idAdmin;?>,<?php echo $row['idTarea'];?>,<?php echo $row['valorPuntos'];?>);' type='button' class='btnenviar btn btn-primary' id='ids' name='ids'>
                         </div>
                     </div>
                 <?php }
@@ -108,3 +112,58 @@
 </body>
 </html>
 
+<script type="text/javascript">
+	function contratar(idUsuario,idTarea,valorPuntos) {
+		const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: true
+		})
+
+		swalWithBootstrapButtons.fire({
+		title: '¿Aceptar tarea?',
+		icon: 'question',
+		showDenyButton: true,
+		confirmButtonText: 'Aceptar',
+		denyButtonText: 'Cancelar',
+		confirmButtonColor: '#7DEB4E',
+		denyButtonColor: '#9b9b9b',
+		reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+
+				swalWithBootstrapButtons.fire(
+					'Se ha generado una petición',
+					'Por favor contacte al Supervisor de la tarea',
+					'success'
+					)
+			
+			$.ajax({
+            type: "POST",
+            url: 'generarTarea.php',
+            data: {
+				"idUsuario":idUsuario,
+				"idTarea":idTarea,
+                "valorPuntos":valorPuntos
+			},
+            success: function(response)
+            {
+                if (response == "1")
+                {
+                }
+                else
+                {
+					Swal.fire(
+					'Fallo en generar la solicitud'
+					)
+                }
+           }
+       });
+	   header("location:taskUser.php");
+		} 
+		})
+	
+	}
+</script>

@@ -7,6 +7,7 @@
 	$contraseña = $_SESSION['pass'];
 	$_SESSION['correo'] = $usuario;
 	$_SESSION['pass'] = $contraseña;
+	$Puntos = 0;
 	//Obtenemos datos de la BD
 	$consultaempl ="SELECT*FROM usuarios where email = '$usuario' and passwordUser = '$contraseña' ";
 	$resultadoemp = mysqli_query($conexion, $consultaempl);
@@ -19,13 +20,18 @@
 		$rEmail = $fila['email'];
 		$rFoto=$fila['foto'];
     }
-	$consulta ="SELECT*FROM usuariodependiente where idUsuarioDep = '$rIdContratante'";
-    $resultado = mysqli_query($conexion, $consulta);
-	$filas = mysqli_num_rows($resultado);
-    if($filas){   
-        $filas = mysqli_fetch_array($resultado);
-		$Puntos = $filas['puntosUsuario'];
-    }else{
+	if($tipoUser == "Usuario"){
+        $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='finalizado'";
+        $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
+        $filasemp3 = mysqli_num_rows($resultadoemp3);    
+    }
+	if($filasemp3 > 0){ 
+		while($fila3 = mysqli_fetch_array($resultadoemp3)) {
+			if($tipoUser == "Usuario"){
+				$Puntos += $fila3['avancePuntos'] ;
+			}
+		}
+	}else{
 		$Puntos = "0";
 	}
 ?>
@@ -132,17 +138,25 @@
 	
 	<div class="card mt-5 mb-5" style="max-width:500px;margin:auto;">
         <div class="card-body text-center" >
-			<h1 class="h3 mb-3">Historial Servicios Contratados</h1>
+		<?php
+			if($tipoUser == "Admin"){
+				echo '<h1 class="h3 mb-3">Historial de Tareas de los Usuarios Dependientes</h1>';
+			}else{
+				echo '<h1 class="h3 mb-3">Historial de Tareas</h1>';
+			}
+			
+			?>
+			
 			<hr>
 			<?php 
-			include('historialContrataciones.php')
+			include('historialTareas.php')
 			?>
         </div>
     </div>
 
 	<footer>
         <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
-            <span class="text-secondary w-100 text-center">iServiGo &copy; 2022</span>
+            
         </div>
     </footer>
   </body>
@@ -184,32 +198,20 @@
 			if (result.isConfirmed) {
 
 				swalWithBootstrapButtons.fire(
-					'Se concluyo el servicio',
+					'Se concluyo la tarea',
 					'',
 					'success'
 					)
 			
 			$.ajax({
             type: "POST",
-            url: 'terminarContratacion.php',
+            url: 'terminarTarea.php',
             data: {
-				"IdContratacion":idBuscar,
+				"IdTarea":idBuscar,
 				"status": "finalizado",
 			},
-            success: function(response)
-            {
-                if (response == "1")
-                {
-                }
-                else
-                {
-					Swal.fire(
-					'Fallo en aceptar la solicitud'
-					)
-                }
-           }
        });
-	   header("location:Perfil_c.php");
+	   header("location::/perfilUser.php");
 		}
 		})
 	}
@@ -225,7 +227,7 @@ function obtenerInfo(idBuscar){
             type: "POST",
             url: 'infoHistorial.php',
             data: {
-				"IdContratacion":idBuscar
+				"IdTarea":idBuscar
 			},
             success: function(response)
             {

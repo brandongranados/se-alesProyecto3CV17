@@ -1,13 +1,14 @@
 <?php
     require_once "../conexion.php";
     $tipoUser = $_SESSION['tipoUser'];
+    $puntostotales = 0;
     //Se obtienen las tareas de sus dependientes
     if($tipoUser == "Usuario"){
-        $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='activo'";
+        $consultaemp3 ="SELECT*FROM tarearealizada where idUsuario = '$rIdContratante' and estatus ='finalizado'";
         $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
         $filasemp3 = mysqli_num_rows($resultadoemp3);    
     }else{
-        $consultaemp3 ="SELECT * FROM usuariodependiente ud JOIN tarearealizada tr ON ud.idUsuarioDep = tr.idUsuario  WHERE ud.idUsuario =  '$rIdContratante' and tr.estatus = 'activo'";
+        $consultaemp3 ="SELECT * FROM usuariodependiente ud JOIN tarearealizada tr ON ud.idUsuarioDep = tr.idUsuario  WHERE ud.idUsuario =  '$rIdContratante' and tr.estatus = 'finalizado'";
         $resultadoemp3 = mysqli_query($conexion, $consultaemp3);
         $filasemp3 = mysqli_num_rows($resultadoemp3);    
     }
@@ -42,9 +43,6 @@
                                        Estatus: $rEstatus  <br>
                                        Valor de la tarea: $rPrecioS</p>";
                                        $tipo='"'."solicitud".'"';
-        if($tipoUser == "Admin"){
-            echo "<input  type='button' class='btn btn-primary' value='Revisar solicitud' onClick='alertar($rIdTarea,$tipo);'>";
-        }
         echo "<hr> </div>";
       }
     }
