@@ -73,11 +73,7 @@
         }
         
         if(empty($username_error) && empty($email_error) && empty($contra_error) && empty($contra1_error)){
-<<<<<<< HEAD
-            $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email, foto) VALUE (?,?,?, null)";
-=======
             $sql = "INSERT INTO usuarios ( nombreUsuario, passwordUser, email, foto) VALUE (?,?,?,?)";
->>>>>>> 218d84d1c2c53120a50fcd0e4d1fd484270e6d0a
 
             if($stmt = mysqli_prepare($conexion, $sql)){
                 mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_contra, $param_email,$ruta);
