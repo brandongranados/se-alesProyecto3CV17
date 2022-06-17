@@ -19,10 +19,15 @@
         $rServicio=$fila3['avancePuntos'];
         $rEstatus=$fila3['estatus'];
         //Obtener nombre del empleado
-        $consultaempl ="SELECT * FROM usuarios where idUsuario='$idUsuario' ";
-        $resultadoemp = mysqli_query($conexion, $consultaempl);
-        $filasempl = mysqli_num_rows($resultadoemp);
-
+        if($tipoUser == "Admin"){
+            $consultaempl ="SELECT * FROM usuarios where idUsuario='$idUsuario' ";
+            $resultadoemp = mysqli_query($conexion, $consultaempl);
+            $filasempl = mysqli_num_rows($resultadoemp);
+        }else{
+            $consultaempl ="SELECT u.nombreUsuario FROM usuarios u JOIN tarea t ON u.idUsuario = t.idUsuario WHERE t.idTarea = '$rIdTarea' ";
+            $resultadoemp = mysqli_query($conexion, $consultaempl);
+            $filasempl = mysqli_num_rows($resultadoemp);
+        }
         if($filasempl){   
             $fila=mysqli_fetch_array($resultadoemp);
             $rNombreC= $fila['nombreUsuario'];
@@ -38,15 +43,21 @@
             $rPrecioS= $fila['valorPuntos'];
         }
         echo "<div class='mb-3'>";
-        echo "<p id='$rIdTarea'>Tarea: $rNombreS <br>
+        if($tipoUser == "Admin"){
+            echo "<p id='$rIdTarea'>Tarea: $rNombreS <br>
                                        Usuario: $rNombreC <br>
                                        Estatus: $rEstatus  <br>
                                        Valor de la tarea: $rPrecioS</p>";
                                        $tipo='"'."solicitud".'"';
-        if($tipoUser == "Admin"){
-            echo "<input  type='button' class='btn btn-primary' value='Revisar solicitud' onClick='alertar($rIdTarea,$tipo);'>";
+            echo "<hr> </div>";
+        }else{
+            echo "<p id='$rIdTarea'>Tarea: $rNombreS <br>
+                                       Usuario Admin: $rNombreC <br>
+                                       Estatus: $rEstatus  <br>
+                                       Valor de la tarea: $rPrecioS</p>";
+                                       $tipo='"'."solicitud".'"';
+            echo "<hr> </div>";
         }
-        echo "<hr> </div>";
       }
     }
     else
