@@ -164,6 +164,19 @@
 			?>
         </div>
     </div>
+	<?php 
+	if($tipoUser == 'Usuario'){
+		echo "<div class='card mt-5 mb-5' style='max-width:500px;margin:auto;'>
+			<div class='card-body text-center' >
+				<h1 class='h3 mb-3'>Historial de Recompensas</h1>
+				<hr>";
+				
+				include('historialRecompensas.php');
+		echo "		
+			</div>
+		</div>";
+	}
+	?>
 
 	<footer>
         <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
