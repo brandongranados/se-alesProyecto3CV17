@@ -30,12 +30,12 @@
         if(empty(trim($_POST["email"]))){
             $email_error = "Por favor ingrese su correo electr&oacute;nico";
         }else{
-            $sql = "SELECT email FROM usuarios WHERE email = ?";
+            $sql = "SELECT idUsuario FROM usuarios WHERE email = ?";
 
             if($stmt = mysqli_prepare($conexion, $sql)){
                 mysqli_stmt_bind_param($stmt, "s", $param_email);
 
-                $param_tel = trim($_POST["email"]);
+                $param_email = trim($_POST["email"]);
 
                 if(mysqli_stmt_execute($stmt)){
                     mysqli_stmt_store_result($stmt);

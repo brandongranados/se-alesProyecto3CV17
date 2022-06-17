@@ -75,7 +75,7 @@
 <header class="encabe">
         <div class="Logo">
             <a class="navText" href="<?php if($tipoUser == "Admin"){
-                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><span>HOME</span></a>    
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
@@ -118,7 +118,7 @@
                             <label class="proLab"><?php echo $row['puntosCuesta']; ?> Puntos</label>
                             <label class="proLab">Fecha y Hora:</label>
                             <label class="proLab"><?php echo $row['fechaHora']; ?></label>
-                            <input value='Contratar servicio' onClick='contratar(<?php echo $idAdmin;?>,<?php echo $row['idRecompensa'];?>,<?php $puntosVale = $row['puntosCuesta']; echo $row['puntosCuesta'];?>);' type='button' class='btnenviar btn btn-primary' id='ids' name='ids'>
+                            <input value='Canjear Recompensa' onClick='contratar(<?php echo $idAdmin;?>,<?php echo $row['idRecompensa'];?>,<?php $puntosVale = $row['puntosCuesta']; echo $row['puntosCuesta'];?>);' type='button' class='btnenviar btn btn-primary' id='ids' name='ids'>
                         </div>
                     </div>
                 <?php }

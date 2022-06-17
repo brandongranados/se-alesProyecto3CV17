@@ -30,7 +30,7 @@
 <body>
 <header class="encabe">
         <div class="Logo">
-            <a class="navText" href="./homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+            <a class="navText" href="./homeUser.php"><span>HOME</span></a>    
         </div>
         <nav>
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    

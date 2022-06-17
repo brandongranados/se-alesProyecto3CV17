@@ -62,7 +62,7 @@
   <header class="encabe">
   		<div class="Logo">
             <a class="navText" href="<?php if($tipoUser == "Admin"){
-                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+                    echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><span>HOME</span></a>    
         </div>
         <nav>
 		<li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    

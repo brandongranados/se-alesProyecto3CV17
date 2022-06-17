@@ -29,7 +29,7 @@
 <body>
 <header class="encabe">
         <div class="Logo">
-            <a class="navText" href="../USER/homeUser.php"><img src="./static/images/Logo.png" class="logito" alt="Logo"></a>    
+            <a class="navText" href="../USER/homeUser.php"><span>HOME</span></a>    
         </div>
         <nav>
             <li><a class="navText" href="../USER/perfilUser.php"><span > Perfil </span></a></li>    
@@ -110,11 +110,6 @@
     </div>
   </div>
   <br>
-  <footer>
-        <div class="bajo bg-primary py-3 d-flex align-items-center contenedor-footer w-100">
-        <span class="w-100 text-center">Nombre del proyecto &copy; 2022</span>
-        </div>
-    </footer>
 </body>
 </html>
 <script type="text/javascript">

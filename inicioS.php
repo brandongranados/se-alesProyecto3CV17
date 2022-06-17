@@ -18,7 +18,7 @@
     <div class="card mt-5" style="max-width:500px;margin:auto;">
         <div class="card-body text-center" >
             <form action="validarInicioSesion.php" method="post" style="max-width:480px;margin:auto;">
-                <img src="static/images/logo.png" alt="LogoEmpresa">
+                
                 <h1 class="h3 mb-3">Iniciar Sesi&oacuten</h1>
                 <input type="hidden" value="<?php echo $tipoUsuario ?>" name="ids" id="ids">
                 <div class="mb-3">
