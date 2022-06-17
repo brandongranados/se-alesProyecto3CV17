@@ -22,13 +22,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="Email" class="inicia">Correo electr&oacute;nico</label>
-                    <input type="text"class="inicia form-control" name="email" id="email" placeholder="Ingresa tu correo electr&oacute;nico" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+                    <input type="text"class="inicia form-control" name="email" id="email" placeholder="Ingresa tu correo electr&oacute;nico">
                     <span style="color: red; font-weight: bold;"><?php echo $email_error; ?></span>
                 </div>
                
                 <div class="mb-3">
                     <label for="pass" class="inicia">Contrase&ntilde;a</label>
-                    <input  type="password" class="inicia form-control" name="pass" id="pass" placeholder="Ingresa tu contrase&ntilde;a" pattern = "^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$">
+                    <input  type="password" class="inicia form-control" name="pass" id="pass" placeholder="Ingresa tu contrase&ntilde;a">
                     <span style="color: red; font-weight: bold;"><?php echo $contra_error; ?></span>
                 </div>
                 <div class="mb-3">
@@ -37,7 +37,7 @@
                     <span style="color: red; font-weight: bold;"><?php echo $contra1_error; ?></span>
                 </div>
                 <div class="seccion-enviar1 d-flex align-items-center justify-content-center mt-3 mb-3">
-                    <button type="submit" class="btnenviar btn btn-primary">Registrar</button>
+                    <button type="submit" class="btnenviar btn btn-primary" id="mensajeRegistro">Registrar</button>
                 </div>
             </form>
         </div>
@@ -46,7 +46,6 @@
     <footer>
         
     </footer>
-    
 </body>
 </html>
 
