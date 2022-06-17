@@ -42,6 +42,7 @@
     <link href="../static/css/style.css" rel="stylesheet" type="text/css">
     <link href="../static/css/agregar.css" rel="stylesheet" type="text/css">
     <link href="../static/css/navegacion.css" rel="stylesheet" type="text/css">
+    <title>Tareas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" 
@@ -54,6 +55,8 @@
                     echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><span>HOME</span></a>    
         </div>
         <nav>
+        <?php if($tipoUser == "Admin"){ echo "<li><a class='navText' href='../CRUD-Usuarios/gestionUsuario.php'><span > Agregar Usuario </span></a></li>"; }
+		?>   
         <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    <li><a class="navText" href="../cerrarSesion.php"><span > Cerrar sesi&oacute;n </span></a></li>
@@ -65,6 +68,7 @@
         <br><br>
         <div class="store-wrapper">
         <div class="category_list">
+            <h3>Tareas</h3>
         <form method="post">
             <select name="servicio">
                 <option value=""></option>
@@ -88,9 +92,9 @@
                     <div class='product-item'>
                     <h4 class='text-center ' style="color: #686767; bold;"><?php echo $row['nombreTarea']; ?></h3>
                         <div class='item-text'>
-                        <label class="proLab">Nombre:</label>
+                        <label class="proLab">Nombre de la tarea:</label>
                             <label class="proLab"><?php echo $row['nombreTarea']; ?></label>
-                            <label class="proLab">Valor:</label>
+                            <label class="proLab">Valor de la tarea:</label>
                             <label class="proLab"><?php echo $row['valorPuntos']; ?> Puntos</label>
                             <label class="proLab">Fecha y Hora:</label>
                             <label class="proLab"><?php echo $row['fechaHora']; ?></label>

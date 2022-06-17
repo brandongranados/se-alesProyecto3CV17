@@ -38,8 +38,8 @@ on delete cascade on update cascade, foreign key(idUsuario) references usuarios(
 /******************************************************CREACION DE LA TABLA DE RECOMPENSA***********************************************************/
 
 create table recompensa (
-idRecompensa integer auto_increment primary key, nombreRecompensa varchar(100) not null unique, puntosCuesta bigint not null, 
-fechaHora datetime not null, foto varchar(500));
+idRecompensa integer auto_increment, idUsuario integer, primary key(idRecompensa, idUsuario), nombreRecompensa varchar(100) not null unique, puntosCuesta bigint not null, 
+fechaHora datetime not null, foto varchar(500), foreign key(idUsuario) references usuarios (idUsuario) on delete cascade on update cascade);
 
 /***************************************************CREACION DE INDEX NOMBRE RECOMPENSA****************************************************************/
 
@@ -56,8 +56,8 @@ on delete cascade on update cascade, foreign key(idUsuario) references usuarios(
 
 start transaction;
 insert into usuarios (email, nombreUsuario, passwordUser, foto) values
-("example1@example.com", "prueba1", "12345", null), ("example2@example.com", "prueba2", "123456", null), ("example3@example.com", "prueba3", "1234567", null),
-("example4@example.com", "prueba4", "12345678", null), ("example5@example.com", "prueba5", "123456789", null);
+("example1@example.com", "prueba1", "12345", "../static/images/perfil/perfil.jpg"), ("example2@example.com", "prueba2", "123456", "../static/images/perfil/perfil.jpg"), ("example3@example.com", "prueba3", "1234567", "../static/images/perfil/perfil.jpg"),
+("example4@example.com", "prueba4", "12345678", "../static/images/perfil/perfil.jpg"), ("example5@example.com", "prueba5", "123456789", "../static/images/perfil/perfil.jpg");
 commit;
 
 start transaction;
@@ -74,12 +74,12 @@ insert into tareaRealizada values (1, 1, 1, "activo"), (2, 3, 2, "activo"), (4, 
 commit;
 
 start transaction;
-insert into recompensa (nombreRecompensa, puntosCuesta, fechaHora, foto) values ("exito", 1000, "2022-05-03 22:17:05", "../static/images/rewards/premio.png"), ("exito2", 2000, "2022-07-23 23:23:23", "../static/images/rewards/premio.png"), 
-("exito3", 3000, "2022-12-12 22:22:22", "../static/images/rewards/premio.png"), ("exito4", 4000, "2012-12-12 10:10:10", "../static/images/rewards/premio.png"), ("exito5", 5000, "2010-10-10 07:07:07", "../static/images/rewards/premio.png");
+insert into recompensa (nombreRecompensa, idUsuario, puntosCuesta, fechaHora, foto) values ("exito", 1000, 1, "2022-05-03 22:17:05", "../static/images/rewards/premio.png"), ("exito2", 2000, 1, "2022-07-23 23:23:23", "../static/images/rewards/premio.png"), 
+("exito3", 3000, 2, "2022-12-12 22:22:22", "../static/images/rewards/premio.png"), ("exito4", 4000, 1, "2012-12-12 10:10:10", "../static/images/rewards/premio.png"), ("exito5", 5000, 2, "2010-10-10 07:07:07", "../static/images/rewards/premio.png");
 commit;
 
 start transaction;
-insert into recompensaUsuario values (1, 1), (2, 2), (3, 3);
+insert into recompensaUsuario values (1, 1, 1000, "si"), (2, 2, 2000, "si"), (3, 3, 3000, "si");
 commit;
 
 /*CONSULTAS PARA USAR EN FUNCIONES ESPECIFICAS PHP*/

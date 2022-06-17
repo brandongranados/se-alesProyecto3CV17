@@ -5,8 +5,6 @@
 	$tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
-	$_SESSION['correo'] = $usuario;
-	$_SESSION['pass'] = $contraseña;
 	$Puntos = 0;
 	//Obtenemos datos de la BD
 	$consultaempl ="SELECT*FROM usuarios where email = '$usuario' and passwordUser = '$contraseña' ";
@@ -54,6 +52,7 @@
 	<link rel="shortcut icon" type="image/ico" href="../static/images/icono.ico">
     <link href="../static/css/navegacion.css" rel="stylesheet" type="text/css">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<title>Perfil</title>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" 
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -65,6 +64,8 @@
                     echo "./homeUser.php";}else{echo "./taskUser.php";}?>"><span>HOME</span></a>    
         </div>
         <nav>
+		<?php if($tipoUser == "Admin"){ echo "<li><a class='navText' href='../CRUD-Usuarios/gestionUsuario.php'><span > Agregar Usuario </span></a></li>"; }
+		?>   
 		<li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    

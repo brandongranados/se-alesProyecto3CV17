@@ -3,6 +3,14 @@
     session_start();
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
+    $consultaempl ="SELECT idUsuario FROM usuarios where email = '$usuario' and passwordUser = '$contraseña' ";
+	$resultadoemp = mysqli_query($conexion, $consultaempl);
+	$filasempl = mysqli_num_rows($resultadoemp);
+	//Se obtienen los datos del contratante
+	if($filasempl){   
+		$fila=mysqli_fetch_array($resultadoemp);
+		$idUsuario = $fila['idUsuario'];
+    }
     $nombre =$_POST['nombre'];
     $valor =$_POST['valor'];
     $Object = new DateTime();
@@ -66,9 +74,9 @@
                  if($tipoImagen == "image/jpeg" || $tipoImagen == "image/jpg" || $tipoImagen == "image/png" || $tipoImagen == "image/gif"){
                      move_uploaded_file($archivo, $ruta);
                      if(empty($nombre_error) && empty($valor_error) ){
-                        $sql = "INSERT INTO recompensa (nombreRecompensa,puntosCuesta,fechaHora,foto) VALUE (?,?,?,?)";            
+                        $sql = "INSERT INTO recompensa (nombreRecompensa, idUsuario,puntosCuesta,fechaHora,foto) VALUE (?,?,?,?,?)";            
                         if($stmt = mysqli_prepare($conexion, $sql)){
-                            mysqli_stmt_bind_param($stmt, "siss", $param_nombre, $param_valor, $fechayHora,$ruta);
+                            mysqli_stmt_bind_param($stmt, "siiss", $param_nombre, $idUsuario, $param_valor, $fechayHora,$ruta);
                             $param_nombre = $nombre;
                             $param_valor = $valor;
                             if(mysqli_stmt_execute($stmt)){
@@ -107,9 +115,9 @@
                   }    
              }else{
                 if(empty($nombre_error) && empty($valor_error) ){
-                    $sql = "INSERT INTO recompensa (nombreRecompensa,puntosCuesta,fechaHora,foto) VALUE (?,?,?,?)";            
+                    $sql = "INSERT INTO recompensa (nombreRecompensa, idUsuario, puntosCuesta,fechaHora,foto) VALUE (?,?,?,?,?)";            
                     if($stmt = mysqli_prepare($conexion, $sql)){
-                        mysqli_stmt_bind_param($stmt, "siss", $param_nombre, $param_valor, $fechayHora,$param_ruta);
+                        mysqli_stmt_bind_param($stmt, "siiss", $param_nombre, $idUsuario, $param_valor, $fechayHora,$param_ruta);
                         $param_nombre = $nombre;
                         $param_valor = $valor;
                         $param_ruta = "../static/images/rewards/premio.png";

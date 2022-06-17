@@ -3,7 +3,15 @@
      include "../conexion.php";
     $usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
-    $consulta ="SELECT *FROM Recompensa";
+    $consultaempl ="SELECT idUsuario FROM usuarios where email = '$usuario' and passwordUser = '$contraseña' ";
+	$resultadoemp = mysqli_query($conexion, $consultaempl);
+	$filasempl = mysqli_num_rows($resultadoemp);
+	//Se obtienen los datos del contratante
+	if($filasempl){   
+		$fila=mysqli_fetch_array($resultadoemp);
+		$idUsuario = $fila['idUsuario'];
+    }
+    $consulta ="SELECT *FROM Recompensa WHERE idUsuario = '$idUsuario'";
     $resultado = mysqli_query($conexion, $consulta);
 ?>
   

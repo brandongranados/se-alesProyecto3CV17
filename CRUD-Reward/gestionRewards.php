@@ -4,7 +4,16 @@
   $tipoUser = $_SESSION['tipoUser'];
 	$usuario = $_SESSION['correo'];
 	$contraseña = $_SESSION['pass'];
-  $resultado = mysqli_query($conexion, "SELECT idUsuario, nombreUsuario FROM usuarios WHERE email != '$usuario' ORDER BY nombreUsuario ASC"); 
+  $consultaempl ="SELECT idUsuario FROM usuarios where email = '$usuario' and passwordUser = '$contraseña' ";
+	$resultadoemp = mysqli_query($conexion, $consultaempl);
+	$filasempl = mysqli_num_rows($resultadoemp);
+	//Se obtienen los datos del contratante
+	if($filasempl){   
+		$fila=mysqli_fetch_array($resultadoemp);
+		$idUsuario = $fila['idUsuario'];
+    }
+
+  $resultado = mysqli_query($conexion, "SELECT u.idUsuario, u.nombreUsuario FROM usuarios u JOIN usuariodependiente ud ON u.idUsuario = ud.idUsuarioDep WHERE ud.idUsuario = '$idUsuario' ORDER BY nombreUsuario ASC"); 
   mysqli_close($conexion);
 
 ?>
@@ -37,6 +46,8 @@
             <a class="navText" href="../USER/homeUser.php"><span>HOME</span></a>    
         </div>
         <nav>
+        <?php if($tipoUser == "Admin"){ echo "<li><a class='navText' href='../CRUD-Usuarios/gestionUsuario.php'><span > Agregar Usuario </span></a></li>"; }
+		?>   
         <li><a class="navText" href="../USER/perfilUser.php"><span > Perfil </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "../CRUD-Task/gestionTasks.php";}else{echo "../USER/taskUser.php";}?>"><span > Tareas </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Admin"){echo "./gestionRewards.php";}else{echo "../USER/rewardUser.php";}?>"><span > Recompensas </span></a></li> 

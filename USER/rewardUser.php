@@ -62,7 +62,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title></title>
+    <title>Recompensas</title>
     <link href="../static/css/style.css" rel="stylesheet" type="text/css">
     <link href="../static/css/agregar.css" rel="stylesheet" type="text/css">
     <link href="../static/css/navegacion.css" rel="stylesheet" type="text/css">
@@ -90,6 +90,7 @@
         <div class="store-wrapper">
         
         <div class="category_list">
+            <h3>Recompensas</h1>
         <form method="post">
             <select name="servicio">
                 <option value=""></option>

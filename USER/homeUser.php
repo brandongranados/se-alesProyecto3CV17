@@ -33,6 +33,8 @@
             <a class="navText" href="./homeUser.php"><span>HOME</span></a>    
         </div>
         <nav>
+        <?php if($tipoUser == "Admin"){ echo "<li><a class='navText' href='../CRUD-Usuarios/gestionUsuario.php'><span > Agregar Usuario </span></a></li>"; }
+		?>   
             <li><a class="navText" href="./perfilUser.php"><span > Perfil </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./taskUser.php";}else{echo "../CRUD-Task/gestionTasks.php";}?>"><span > Tareas </span></a></li>    
             <li><a class="navText" href="<?php if($tipoUser == "Usuario"){echo "./rewardUser.php";}else{echo "../CRUD-Reward/gestionRewards.php";}?>"><span > Recompensas </span></a></li>    
