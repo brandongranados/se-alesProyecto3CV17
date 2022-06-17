@@ -50,6 +50,7 @@
                                        Valor de la tarea: $rPrecioS</p>";
                                        $tipo='"'."solicitud".'"';
             echo "<hr> </div>";
+            echo "<input  type='button' class='btn btn-primary' value='Revisar solicitud' onClick='alertar($rIdTarea,$tipo);'>";
         }else{
             echo "<p id='$rIdTarea'>Tarea: $rNombreS <br>
                                        Usuario Admin: $rNombreC <br>
