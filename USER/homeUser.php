@@ -57,7 +57,7 @@
                     <div class='product-item'>
                     <img class="pro" src="<?php echo $row['foto']; ?>">    
                         <div class='item-text'>
-                        <label class="proLab">Nombre:</label>
+                        <label class="proLab">Nombre del usuario:</label>
                             <label class="proLab"><?php echo $row['nombreUsuario']; ?></label>
                             <label class="proLab">Puntos del Usuario:</label>
                             <label class="proLab"><?php 
